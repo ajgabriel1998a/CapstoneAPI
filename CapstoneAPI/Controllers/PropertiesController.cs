@@ -1,10 +1,12 @@
 ﻿using CapstoneAPI.Models;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CapstoneAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [EnableCors("CORSPolicy")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class PropertiesController : ControllerBase
     {
@@ -24,7 +26,7 @@ namespace CapstoneAPI.Controllers
             
         }
         [HttpGet("{id}")]
-        public async Task<ActionResult<List<Properties>>> Get(int id)
+        public async Task<ActionResult<List<Properties>>> GetProperty(int id)
         {
             var property = await context.Properties.FindAsync(id);
             if (property == null)
